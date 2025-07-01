@@ -146,15 +146,26 @@ void saveProducts(Product products[], int count) {
 
 void addProduct() {
     Product p;
+    char input[100];
+
     printf("\n--- Add New Product ---\n");
     while (1) {
-        p.id = getIntInput("Enter product ID", 1);
-        if (p.id == 0) break;
-        if (productExists(p.id)) printf("ID exists. Try again.\n");
-        else {
+        getStringInput("Enter product ID (or 'exit' to cancel): ", input, sizeof(input));
+        if (strcmp(input, "exit") == 0) break;
+
+        p.id = atoi(input);
+        if (p.id <= 0) {
+            printf("Invalid ID. Please enter a positive number.\n");
+            continue;
+        }
+
+        if (productExists(p.id)) {
+            printf("ID exists. Try again.\n");
+        } else {
             getStringInput("Enter product name: ", p.name, MAX_NAME);
             p.price = getFloatInput("Enter price", 0);
             if (p.price == 0) break;
+
             p.stock = getIntInput("Enter stock", 0);
             if (p.stock == 0) break;
 
