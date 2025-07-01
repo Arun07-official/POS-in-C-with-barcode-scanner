@@ -1,0 +1,4 @@
+admin admin123 admin
+cashier1 cashier123 cashier
+cashier2 pass456 cashier
+manager manager123 admin
